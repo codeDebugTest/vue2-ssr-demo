@@ -1,4 +1,5 @@
 # hello-world
+[中文文档](https://github.com/codeDebugTest/vue2-ssr-demo/blob/master/README.zh-cn.md)
 
 ## Project setup
 ```
