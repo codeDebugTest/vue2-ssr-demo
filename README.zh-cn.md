@@ -1,5 +1,19 @@
 # hello-world
 
+### 动机
+鉴于vue-ssr 官网例子 https://github.com/vuejs/vue-hackernews-2.0/ 
+1. too old
+2. too slow，通过webpack 打包，非vue-cli
+3. unused github 上好多通过vue-cli的项目跑不起来
+4. not compatible 不兼容 CSR模式
+
+通过此项目你可以快速开始一个更具现代化地 vue-ssr 项目。
+
+#### 好处
+1. 支持vue-cli4
+2. 向下兼容：支持CSR(客户端渲染)模式
+
+
 ### 安装
 ```sh
 npm install
