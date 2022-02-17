@@ -1,12 +1,17 @@
 {
   "name": "vue2-ssr-demo",
   "version": "1.0.0",
-  "description": "a ssr demo project which  build by vue-cli",
-  "main": "index.js",
+  "description": "a ssr demo project which build by vue-cli",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "start": "cross-env NODE_ENV=production node ./server/index.js",
+    "serve": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "STATIC_PORT=8090 vue-cli-service serve",
+    "dev:server": "STATIC_PORT=8090 cross-env WEBPACK_TARGET=server node ./server/index.js",
+    "build": "rm -rf dist && npm run build:server && mv dist/vue-ssr-server-bundle.json bundle && npm run build:client && mv bundle dist/vue-ssr-server-bundle.json",
+    "build:client": "NODE_ENV=production WEBPACK_TARGET=client vue-cli-service build",
+    "build:server": "cross-env NODE_ENV=production WEBPACK_TARGET=server vue-cli-service build",
+    "lint": "vue-cli-service lint --no-fix; stylelint src/**/*.{vue,css,less}",
+    "lint:fix": "vue-cli-service lint; stylelint --fix src/**/*.{vue,css,less}"
   },
   "repository": {
     "type": "git",
@@ -18,12 +23,21 @@
     "vue-cli"
   ],
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11",
+    "axios": "^0.25.0",
+    "core-js": "^3.8.3",
+    "cross-env": "^7.0.3",
+    "koa": "^2.13.4",
+    "koa-router": "^9.4.0",
+    "koa-static": "^5.0.0",
+    "lodash": "^4.17.21",
+    "vue": "^2.6.14",
+    "vue-awesome": "^4.5.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/eslint-plugin": "^7.16.5",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-router": "~4.5.0",
@@ -31,16 +45,23 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "concurrently": "^7.0.0",
+    "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^7.15.1",
+    "husky": "^4.3.8",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.5.0",
-    "vue-template-compiler": "^2.6.11"
+    "memory-fs": "^0.5.0",
+    "stylelint": "^13.13.1",
+    "vue-server-renderer": "^2.6.14",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-node-externals": "^1.7.2",
+    "webpackbar": "^5.0.2"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
