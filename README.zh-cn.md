@@ -69,3 +69,5 @@ npm run lint
 ```sh
 npm run lint:fix
 ```
+
+## [搭建指南](https://github.com/codeDebugTest/blog/issues/4)
